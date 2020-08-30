@@ -34,8 +34,6 @@ for file in glob.iglob(dataset+'**/*.html', recursive=True):
         else:
             dictionary[token] = token;
 
-
-
 output = open("../dictionary.json", 'w')
 json.dump(dictionary, output)
 output.close()

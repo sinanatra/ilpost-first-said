@@ -26,12 +26,14 @@ headers = {
 req = urllib.request.Request("https://www.ilpost.it", None, headers)
 html = urllib.request.urlopen(req).read()
 soup = BeautifulSoup(html, features="lxml")
+previousUrl = ''
 
 for a_tag in soup.find_all('a', href=True):
     print('href: ', a_tag['href'])
-    if( dateParser in a_tag['href']):
+    if( str(a_tag['href']) not in previousUrl and dateParser in a_tag['href']):
+        previousUrl = str(a_tag['href'])
         try:
-            innerHtml = urllib.request.urlopen(a_tag['href']).read()
+            innerHtml = urllib.req,uest.urlopen(a_tag['href']).read()
             innerSoup = BeautifulSoup(innerHtml, features="lxml")
             
             # ignore all scripts and css
