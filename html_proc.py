@@ -41,9 +41,14 @@ for a_tag in soup.find_all('a', href=True):
             # ignore all scripts and css
             for script in innerSoup(["script", "style"]):
                 script.extract()
+            
+            #ignore iframes
+            for div in innerSoup.find_all("blockquote", {'class':'twitter-tweet'}): 
+                div.decompose()
 
             # get  and cleans the text
-            text = innerSoup.get_text()
+            text = innerSoup.find('article').get_text()
+            
             lines = (line.strip() for line in text.splitlines())
             chunks = (phrase.strip()
                       for line in lines for phrase in line.split("  "))
