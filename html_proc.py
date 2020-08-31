@@ -61,7 +61,7 @@ for a_tag in soup.find_all('a', href=True):
             tokens = list(set(tokens))
 
             if str(dateParser) in a_tag['href']:
-                database.write(str(a_tag['href']) + '\t' + str(tokens))
+                database.write(str(a_tag['href']) + '\t' + str(tokens) + '\t' )
 
             for token in tokens:
                 if dictionary.get(token) is None:
