@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
 from datetime import datetime
+from pathlib import Path
 from utils.tweet import updateStatus
 
 date = datetime.today().strftime('%Y-%m-%d')
@@ -19,8 +20,14 @@ with open('./dictionary.json', 'r') as file:
 dictionary = json.loads(data)
 
 #  save array to be visualised later
-database = open('./database/' + date + '.tsv', 'w')
-database.write('page' + '\t' + 'tokens' + '\t' + 'newtokens' + '\n')
+file = Path('./database/' + date + '.tsv')
+if file.is_file():
+    database = open('./database/' + date + '.tsv', 'a')
+else:
+    database = open('./database/' + date + '.tsv', 'w')
+    database.write('page' + '\t' + 'tokens' + '\t' + 'newtokens' + '\n')
+
+checkLinks = open('./database/' + date + '.tsv').read()
 
 headers = {
     'User-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0'}
@@ -59,17 +66,18 @@ for a_tag in soup.find_all('a', href=True):
             tokens = tokenizer.tokenize(text)
             # remove duplicates
             tokens = list(set(tokens))
-
-            if str(dateParser) in a_tag['href']:
+            
+            if str(dateParser) in a_tag['href'] and str(a_tag['href']) not in checkLinks:
                 database.write(str(a_tag['href']) + '\t' + str(tokens) + '\t' )
-
+    
+            
             for token in tokens:
                 if dictionary.get(token) is None:
                     if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
                         continue
                     else:
                         print('new token!', token)
-                        if str(dateParser) in a_tag['href']:
+                        if str(dateParser) in a_tag['href'] and str(a_tag['href']) not in checkLinks:
                             database.write(str(token) + ', ')
                         dictionary[token] = token
 
@@ -77,7 +85,7 @@ for a_tag in soup.find_all('a', href=True):
                         updateStatus(token, a_tag['href'])
                         time.sleep(5)
                         
-            if str(dateParser) in a_tag['href']:
+            if str(dateParser) in a_tag['href'] and str(a_tag['href']) not in checkLinks:
                 database.write('\n')
 
         except Exception as e:
