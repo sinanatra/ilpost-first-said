@@ -13,4 +13,4 @@ statusid = ''
 def updateStatus (status, link):
     tweet = api.update_status(status)
     statusid = tweet.id_str
-    tweet = api.update_status('@ilpostdice ' + link, statusid)
+    tweet = api.update_status(status ' appare in: ''@ilpostdice ' + link, statusid)
