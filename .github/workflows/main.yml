@@ -1,0 +1,45 @@
+name: Python application
+
+on:
+  schedule:
+    - cron:  '0 */1 * * mon-sat'
+  push:
+    branches:
+      - master
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.6
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.6
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: html parser
+      env:
+        TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+        TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+        TWITTER_TOKEN: ${{ secrets.TWITTER_TOKEN }}
+        TWITTER_TOKEN_SECRET: ${{ secrets.TWITTER_TOKEN_SECRET }}
+      run: |
+          python html_proc.py  
+          git status
+    - name: push
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Apply automatic changes
+        branch: master
+        commit_options: '--no-verify --signoff'
+        file_pattern: '*.tsv'
+        repository: .
+        commit_user_name: Giacomo Nanni Bot
+        commit_user_email: gn.nanni@gmail.com
+        commit_author: Author <gn.nanni@gmail.com>
+        tagging_message: 'v1.0.0'
+        push_options: '--force'
