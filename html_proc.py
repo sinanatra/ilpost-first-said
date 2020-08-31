@@ -58,17 +58,17 @@ for a_tag in soup.find_all('a', href=True):
 
             for token in tokens:
                 if dictionary.get(token) is None:
-                    if str(token).istitle() or str(token).isupper() or any(str.isdigit(c) for c in token) is True:
+                    if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
                         continue
                     else:
                         print('new token!', token)
                         database.write(str(token) + ', ')
-                        dictionary[token] = token       
+                        dictionary[token] = token
 
                         # tweets stuff
                         updateStatus(token, a_tag['href'])
                         time.sleep(5)
-            
+
             database.write('\n')
 
         except Exception as e:
