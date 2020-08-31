@@ -30,12 +30,12 @@ previousUrl = ''
 
 for a_tag in soup.find_all('a', href=True):
     print('href: ', a_tag['href'])
-    if( str(a_tag['href']) not in previousUrl and dateParser in a_tag['href']):
+    if(str(a_tag['href']) not in previousUrl and dateParser in a_tag['href']):
         previousUrl = str(a_tag['href'])
         try:
-            innerHtml = urllib.req,uest.urlopen(a_tag['href']).read()
+            innerHtml = urllib.request.urlopen(a_tag['href']).read()
             innerSoup = BeautifulSoup(innerHtml, features="lxml")
-            
+
             # ignore all scripts and css
             for script in innerSoup(["script", "style"]):
                 script.extract()
@@ -50,19 +50,19 @@ for a_tag in soup.find_all('a', href=True):
             # get tokens - ignore punctuation and capital letters
             tokenizer = RegexpTokenizer(r'\w+')
             tokens = tokenizer.tokenize(text)
+            # remove duplicates
+            tokens = list(set(tokens))
             database.write(str(a_tag['href']) + '\t' + str(tokens))
 
             for token in tokens:
                 if dictionary.get(token) is None:
-                    if token.istitle():
+                    if token.istitle() or str(token).isdigit():
                         continue
                     else:
                         print('new token!', token)
                         database.write(str(token) + ', ')
                         dictionary[token] = token
                         # tweets stuff
-                        
-
             database.write('\n')
 
         except Exception as e:
