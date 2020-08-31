@@ -10,7 +10,7 @@ from datetime import datetime
 from utils.tweet import updateStatus
 
 date = datetime.today().strftime('%Y-%m-%d')
-#dateParser = datetime.today().strftime('%Y/%m/%d')
+dateParser = datetime.today().strftime('%Y/%m/%d')
 
 # this is the main dictionary
 with open('./dictionary.json', 'r') as file:
@@ -59,7 +59,9 @@ for a_tag in soup.find_all('a', href=True):
             tokens = tokenizer.tokenize(text)
             # remove duplicates
             tokens = list(set(tokens))
-            database.write(str(a_tag['href']) + '\t' + str(tokens))
+
+            if str(dateParser) in a_tag['href']):
+                database.write(str(a_tag['href']) + '\t' + str(tokens))
 
             for token in tokens:
                 if dictionary.get(token) is None:
@@ -67,7 +69,8 @@ for a_tag in soup.find_all('a', href=True):
                         continue
                     else:
                         print('new token!', token)
-                        database.write(str(token) + ', ')
+                        if str(dateParser) in a_tag['href']):
+                            database.write(str(token) + ', ')
                         dictionary[token] = token
 
                         # tweets stuff
