@@ -58,7 +58,7 @@ for a_tag in soup.find_all('a', href=True):
 
             for token in tokens:
                 if dictionary.get(token) is None:
-                    if str(token).istitle() or str(token).isupper() or str(token).isdigit():
+                    if str(token).istitle() or str(token).isupper() or any(str.isdigit(c) for c in token) is True:
                         continue
                     else:
                         print('new token!', token)
