@@ -76,8 +76,9 @@ for a_tag in soup.find_all('a', href=True):
                         # tweets stuff
                         updateStatus(token, a_tag['href'])
                         time.sleep(5)
-
-            database.write('\n')
+                        
+            if str(dateParser) in a_tag['href']:
+                database.write('\n')
 
         except Exception as e:
             print(e)
