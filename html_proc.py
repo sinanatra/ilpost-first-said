@@ -1,11 +1,13 @@
 import os
 import glob
 import json
+import time
 import urllib.request
 from bs4 import BeautifulSoup
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
 from datetime import datetime
+from utils.tweet import updateStatus
 
 date = datetime.today().strftime('%Y-%m-%d')
 dateParser = datetime.today().strftime('%Y/%m/%d')
@@ -56,13 +58,17 @@ for a_tag in soup.find_all('a', href=True):
 
             for token in tokens:
                 if dictionary.get(token) is None:
-                    if token.istitle() or str(token).isdigit():
+                    if str(token).istitle() or str(token).isupper() or str(token).isdigit():
                         continue
                     else:
                         print('new token!', token)
                         database.write(str(token) + ', ')
-                        dictionary[token] = token
+                        dictionary[token] = token       
+
                         # tweets stuff
+                        updateStatus(token, a_tag['href'])
+                        time.sleep(1)
+            
             database.write('\n')
 
         except Exception as e:
