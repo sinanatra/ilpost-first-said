@@ -60,7 +60,7 @@ for a_tag in soup.find_all('a', href=True):
             # remove duplicates
             tokens = list(set(tokens))
 
-            if str(dateParser) in a_tag['href']):
+            if str(dateParser) in a_tag['href']:
                 database.write(str(a_tag['href']) + '\t' + str(tokens))
 
             for token in tokens:
@@ -69,7 +69,7 @@ for a_tag in soup.find_all('a', href=True):
                         continue
                     else:
                         print('new token!', token)
-                        if str(dateParser) in a_tag['href']):
+                        if str(dateParser) in a_tag['href']:
                             database.write(str(token) + ', ')
                         dictionary[token] = token
 
