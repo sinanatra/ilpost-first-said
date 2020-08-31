@@ -1,0 +1,13 @@
+body {
+    font-family: Monospace;
+    color: black;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.canvas > div {
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+    display: inline-block;
+}
