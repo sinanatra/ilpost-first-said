@@ -10,7 +10,7 @@ from datetime import datetime
 from utils.tweet import updateStatus
 
 date = datetime.today().strftime('%Y-%m-%d')
-dateParser = datetime.today().strftime('%Y/%m/%d')
+#dateParser = datetime.today().strftime('%Y/%m/%d')
 
 # this is the main dictionary
 with open('./dictionary.json', 'r') as file:
@@ -31,8 +31,8 @@ soup = BeautifulSoup(html, features="lxml")
 previousUrl = ''
 
 for a_tag in soup.find_all('a', href=True):
-    print('href: ', a_tag['href'])
-    if(str(a_tag['href']) not in previousUrl and dateParser in a_tag['href']):
+    if(str(a_tag['href']) not in previousUrl and 'www.ilpost.it' in a_tag['href']):
+        print('href: ', a_tag['href'])
         previousUrl = str(a_tag['href'])
         try:
             innerHtml = urllib.request.urlopen(a_tag['href']).read()
