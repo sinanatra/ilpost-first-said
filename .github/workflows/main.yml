@@ -36,7 +36,7 @@ jobs:
         commit_message: Apply automatic changes
         branch: master
         commit_options: '--no-verify --signoff'
-        file_pattern: '*.tsv'
+        file_pattern: '*.tsv *.json'
         repository: .
         commit_user_name: Giacomo Nanni Bot
         commit_user_email: gn.nanni@gmail.com

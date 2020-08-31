@@ -67,7 +67,7 @@ for a_tag in soup.find_all('a', href=True):
 
                         # tweets stuff
                         updateStatus(token, a_tag['href'])
-                        time.sleep(1)
+                        time.sleep(5)
             
             database.write('\n')
 
