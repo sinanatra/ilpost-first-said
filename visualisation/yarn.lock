@@ -1526,11 +1526,6 @@ d3-fetch@2:
   dependencies:
     d3-dsv "1 - 2"
 
-d3-force-gravity@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/d3-force-gravity/-/d3-force-gravity-1.0.2.tgz#d5b6ebbca5d974760d256fb03405c16e202f9e7f"
-  integrity sha1-1bbrvKXZdHYNJW+wNAXBbiAvnn8=
-
 d3-force@2:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/d3-force/-/d3-force-2.1.1.tgz#f20ccbf1e6c9e80add1926f09b51f686a8bc0937"
@@ -3409,6 +3404,11 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+matter-js@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/matter-js/-/matter-js-0.14.2.tgz#8169af9e06fdc356ba9e72b49624eb329839883b"
+  integrity sha512-3ttVT8cJlQnGRjBa8MyVrGyvGmnmOkZ3YsyemIw+KwEEdVi70mo32FH1Eta2b3GfdDJFbMDRqyMQt4heNKBUEA==
 
 md5.js@^1.3.4:
   version "1.3.5"

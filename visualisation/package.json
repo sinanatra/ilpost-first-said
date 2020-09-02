@@ -5,8 +5,8 @@
   "license": "MIT",
   "dependencies": {
     "d3": "^6.1.1",
-    "d3-force-gravity": "^1.0.2",
-    "file-loader": "^6.0.0"
+    "file-loader": "^6.0.0",
+    "matter-js": "^0.14.2"
   },
   "scripts": {
     "watch": "webpack-dev-server --mode development --watch",
