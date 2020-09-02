@@ -90,7 +90,10 @@ function loadData() {
                     .attr('class', 'block')
                     .text(word);
 
-                if (newtoken.includes(word.replace(' ', ''))) {
+                let fixToken = newtoken.replace(' ', '').replace(',', '')
+                word = word.replace(' ', '')
+
+                if (fixToken == word) {
                     element.attr('id', 'highlight')
                 }
 
