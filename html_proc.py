@@ -53,6 +53,9 @@ for a_tag in soup.find_all('a', href=True):
             for div in innerSoup.find_all("blockquote", {'class':'twitter-tweet'}): 
                 div.decompose()
 
+            for div in innerSoup.find_all("blockquote", {'class':'instagram-media'}): 
+                div.decompose()
+                
             # get  and cleans the text
             text = innerSoup.find('article').get_text()
             
