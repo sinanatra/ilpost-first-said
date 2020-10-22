@@ -1,5 +1,6 @@
 import tweepy
 import os
+import time
 
 # Authenticate to Twitter
 auth = tweepy.OAuthHandler(os.environ['TWITTER_API_KEY'], os.environ['TWITTER_API_SECRET'])
