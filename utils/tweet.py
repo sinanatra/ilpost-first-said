@@ -19,7 +19,7 @@ def updateStatus (status, link):
     tweet = api.update_status(status)
     statusid = tweet.id_str
     # reply to tweet
-    time.sleep(10)
+    time.sleep(30)
     api1.update_status('@ilpostdice ' + status +' appare in:  ' + link, statusid)
 
 
