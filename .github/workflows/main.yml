@@ -45,7 +45,7 @@ jobs:
         commit_user_name: Giacomo Nanni Bot
         commit_user_email: gn.nanni@gmail.com
         commit_author: Author <actions@github.com>
-        tagging_message: 'v1.0.0'
+        #tagging_message: 'v1.0.0'
         push_options: '--force'
     - name: upload tsv
       uses: stefanzweifel/git-auto-commit-action@v4
@@ -58,5 +58,5 @@ jobs:
         commit_user_name: Giacomo Nanni Bot
         commit_user_email: gn.nanni@gmail.com
         commit_author: Author <actions@github.com>
-        tagging_message: 'v1.0.0'
+        #tagging_message: 'v1.0.0'
         push_options: '--force'
