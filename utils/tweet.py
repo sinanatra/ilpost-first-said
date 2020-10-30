@@ -19,5 +19,7 @@ def updateStatus (status, link):
     tweet = api.update_status(status)
     statusid = tweet.id_str
     # reply to tweet
-    time.sleep(30)
-    api.update_status(status +' appare in:  ' + link.replace('https://www.', ''), statusid)
+    time.sleep(10)
+    cleanLink = link.replace('https://www.', '')
+    print(cleanLink)
+    api.update_status(status +' appare in:  ' + '"' +cleanLink  + '"' , statusid)
