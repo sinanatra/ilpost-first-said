@@ -20,6 +20,6 @@ def updateStatus (status, link):
     statusid = tweet.id_str
     # reply to tweet
     time.sleep(10)
-    cleanLink = link.replace('https://www.', '')
-    print(cleanLink)
-    api.update_status(status + ' appare in:  ' + cleanLink , statusid)
+    #cleanLink = link.replace('https://www.', '')
+    #print(cleanLink)
+    #api.update_status(status + ' appare in:  ' + cleanLink , statusid)
