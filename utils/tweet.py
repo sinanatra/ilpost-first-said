@@ -22,4 +22,4 @@ def updateStatus (status, link):
     time.sleep(10)
     cleanLink = link.replace('https://www.', '')
     print(cleanLink)
-    api.update_status(status +' appare in:  ' + '"' +cleanLink  + '"' , statusid)
+    api.update_status(status + ' appare in:  ' + cleanLink , statusid)
