@@ -55,7 +55,10 @@ for a_tag in soup.find_all('a', href=True):
 
             for div in innerSoup.find_all("blockquote", {'class':'instagram-media'}): 
                 div.decompose()
-                
+            
+            #get title
+            title = innerSoup.find("h1", {'class':'entry-title'}).get_text()
+            
             # get  and cleans the text
             text = innerSoup.find('article').get_text()
             
@@ -85,7 +88,7 @@ for a_tag in soup.find_all('a', href=True):
                         dictionary[token] = token
 
                         # tweets stuff
-                        updateStatus(token, a_tag['href'])
+                        updateStatus(token, a_tag['href'],title)
                         time.sleep(5)
                         
             if str(dateParser) in a_tag['href'] and str(a_tag['href']) not in checkLinks:
