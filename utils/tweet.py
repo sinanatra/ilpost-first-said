@@ -15,12 +15,9 @@ api1 = tweepy.API(auth1)
 
 statusid = ''
 
-def updateStatus (status, link):
+def updateStatus (status, link, title):
     tweet = api.update_status(status)
     statusid = tweet.id_str
     # reply to tweet
     time.sleep(10)
-    #cleanLink = link.replace('https://www.', '')
-    #print(cleanLink)
-    #api1.update_status(status + ' appare in:  ' + cleanLink , statusid)
-    api1.update_status(status + ' appare in:  ' + cleanLink )
+    api.update_status(status + ' appare in:  ' + '"' + title +'"', statusid)
