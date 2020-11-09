@@ -21,16 +21,17 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: download secret
+      env:
+        SHEET_JSON: ${{ secrets.SHEET_JSON }}
+      run: |
+        echo "$SHEET_JSON" > sheet-274815-b5805997d72c.json
     - name: html parser
       env:
         TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
         TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
         TWITTER_TOKEN: ${{ secrets.TWITTER_TOKEN }}
-        TWITTER_TOKEN_SECRET: ${{ secrets.TWITTER_TOKEN_SECRET }}
-        TWITTER_API_KEY1: ${{ secrets.TWITTER_API_KEY1 }}
-        TWITTER_API_SECRET1: ${{ secrets.TWITTER_API_SECRET1 }}
-        TWITTER_TOKEN1: ${{ secrets.TWITTER_TOKEN1 }}
-        TWITTER_TOKEN_SECRET1: ${{ secrets.TWITTER_TOKEN_SECRET1 }}  
+        TWITTER_TOKEN_SECRET: ${{ secrets.TWITTER_TOKEN_SECRET }} 
       run: |
           python html_proc.py  
           git status
