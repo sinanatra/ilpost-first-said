@@ -13,7 +13,7 @@ from utils.tweet import updateStatus
 import gspread
 from google.oauth2.service_account import Credentials
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-credentials = Credentials.from_service_account_file(os.environ['SHEET_JSON'], scopes=scope)
+credentials = Credentials.from_service_account_file('./sheet-274815-b5805997d72c.json', scopes=scope)
 
 gc = gspread.authorize(credentials)
 sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1TydqXkPrlhnETTwzsNeRLBTpi0rCCDxTFRuWcPMfwgU/edit?usp=sharing')
