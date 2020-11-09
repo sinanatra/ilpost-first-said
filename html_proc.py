@@ -10,14 +10,25 @@ from datetime import datetime
 from pathlib import Path
 from utils.tweet import updateStatus
 
+import gspread
+from google.oauth2.service_account import Credentials
+scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
+credentials = Credentials.from_service_account_file('./sheet-274815-b5805997d72c.json', scopes=scope)
+
+gc = gspread.authorize(credentials)
+sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1TydqXkPrlhnETTwzsNeRLBTpi0rCCDxTFRuWcPMfwgU/edit?usp=sharing')
+worksheet_list = sh.worksheets()
+sheet = worksheet_list[0]
+sheetValues = sheet.get_all_values()
+
+dictionary = {}
+
+for i in sheetValues:
+    dictionary[i[0]] = i[0]
+    
 date = datetime.today().strftime('%Y-%m-%d')
 dateParser = datetime.today().strftime('%Y/%m/%d')
 
-# this is the main dictionary
-with open('./dictionary.json', 'r') as file:
-    data = file.read()
-
-dictionary = json.loads(data)
 
 #  save array to be visualised later
 file = Path('./database/' + date + '.tsv')
@@ -53,12 +64,12 @@ for a_tag in soup.find_all('a', href=True):
             for div in innerSoup.find_all("blockquote", {'class':'twitter-tweet'}): 
                 div.decompose()
 
-            for div in innerSoup.find_all("blockquote", {'class':'instagram-media'}): 
+            for div in innerSoup.find_all("blockquote", {'class':'instagram-media'}):
                 div.decompose()
-            
+
             #get title
             title = innerSoup.find("h1", {'class':'entry-title'}).get_text()
-            
+
             # get  and cleans the text
             text = innerSoup.find('article').get_text()
             
@@ -85,7 +96,10 @@ for a_tag in soup.find_all('a', href=True):
                         print('new token!', token)
                         if str(dateParser) in a_tag['href'] and str(a_tag['href']) not in checkLinks:
                             database.write(str(token) + ', ')
+                            
+                        # appends the data to the temporary dictionary and to the spreadsheet
                         dictionary[token] = token
+                        sheet.append_row([token])
 
                         # tweets stuff
                         updateStatus(token, a_tag['href'],title)
@@ -98,7 +112,3 @@ for a_tag in soup.find_all('a', href=True):
             print(e)
 
 database.close()
-
-output = open("./dictionary.json", 'w')
-json.dump(dictionary, output)
-output.close()
