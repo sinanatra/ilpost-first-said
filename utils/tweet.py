@@ -16,4 +16,4 @@ def updateStatus (status, link, title):
     statusid = tweet.id_str
     # reply to tweet
     time.sleep(10)
-    api.update_status(status + ' appare in:  ' + '"' + title +'"', statusid)
+    #api.update_status(status + ' appare in:  ' + '"' + title +'"', statusid)
