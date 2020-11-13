@@ -58,6 +58,6 @@ jobs:
         repository: .
         commit_user_name: Giacomo Nanni Bot
         commit_user_email: gn.nanni@gmail.com
-        commit_author: Author <actions@github.com>
+        commit_author: Author <gn.nanni@gmail.com>
         #tagging_message: 'v1.0.0'
         push_options: '--force'
