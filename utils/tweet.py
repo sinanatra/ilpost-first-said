@@ -13,8 +13,7 @@ statusid = ''
 
 def updateStatus (status, link, title):
     tweet = api.update_status(status)
-    #tweet = api.update_status(status + '\n\nappare in:  ' + '"' + title +'"')
     statusid = tweet.id_str
     # reply to tweet
     time.sleep(10)
-    #api.update_status(status + ' appare in:  ' + '"' + title +'"', statusid)
+    api.update_status('Appare in:  ' + '"' + title +'" ' + link, in_reply_to_status_id = statusid, card_uri = 'tombstone://card')
