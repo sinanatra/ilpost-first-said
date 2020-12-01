@@ -12,7 +12,8 @@ api = tweepy.API(auth)
 statusid = ''
 
 def updateStatus (status, link, title):
-    tweet = api.update_status(status)
+    #tweet = api.update_status(status)
+    tweet = api.update_status(status + '\n\nappare in:  ' + '"' + title +'"')
     statusid = tweet.id_str
     # reply to tweet
     time.sleep(10)
