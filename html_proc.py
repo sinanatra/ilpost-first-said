@@ -21,10 +21,10 @@ worksheet_list = sh.worksheets()
 sheet = worksheet_list[0]
 sheetValues = sheet.get_all_values()
 
-dictionary = {}
+vocabulary = set()
 
 for i in sheetValues:
-    dictionary[i[0]] = i[0]
+    vocabulary.add(i[0])
     
 date = datetime.today().strftime('%Y-%m-%d')
 dateParser = datetime.today().strftime('%Y/%m/%d')
@@ -89,7 +89,7 @@ for a_tag in soup.find_all('a', href=True):
     
             
             for token in tokens:
-                if dictionary.get(token) is None:
+                if token not in vocabulary:
                     if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
                         continue
                     else:
@@ -97,8 +97,8 @@ for a_tag in soup.find_all('a', href=True):
                         if str(dateParser) in a_tag['href'] and str(a_tag['href']) not in checkLinks:
                             database.write(str(token) + ', ')
                             
-                        # appends the data to the temporary dictionary and to the spreadsheet
-                        dictionary[token] = token
+                        # appends the data to the temporary vocabulary and to the spreadsheet
+                        vocabulary.add(token)
                         sheet.append_row([token])
 
                         # tweets stuff
