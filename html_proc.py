@@ -29,27 +29,16 @@ for i in sheetValues:
 date = datetime.today().strftime('%Y-%m-%d')
 dateParser = datetime.today().strftime('%Y/%m/%d')
 
-
-#  save array to be visualised later
-file = Path('./database/' + date + '.tsv')
-if file.is_file():
-    database = open('./database/' + date + '.tsv', 'a')
-else:
-    database = open('./database/' + date + '.tsv', 'w')
-    database.write('page' + '\t' + 'tokens' + '\t' + 'newtokens' + '\n')
-
-checkLinks = open('./database/' + date + '.tsv').read()
-
 headers = {
     'User-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0'}
 
-req = urllib.request.Request("https://www.ilpost.it", None, headers)
+req = urllib.request.Request("https://www.ilpost.it" , None, headers)
 html = urllib.request.urlopen(req).read()
 soup = BeautifulSoup(html, features="lxml")
 previousUrl = ''
 
 for a_tag in soup.find_all('a', href=True):
-    if(str(a_tag['href']) not in previousUrl and 'www.ilpost.it' in a_tag['href']):
+    if(str(a_tag['href']) not in previousUrl and 'www.ilpost.it/'+ str(dateParser) in a_tag['href']):
         print('href: ', a_tag['href'])
         previousUrl = str(a_tag['href'])
         try:
@@ -84,19 +73,12 @@ for a_tag in soup.find_all('a', href=True):
             # remove duplicates
             tokens = list(set(tokens))
             
-            if str(dateParser) in a_tag['href'] and str(a_tag['href']) not in checkLinks:
-                database.write(str(a_tag['href']) + '\t' + str(tokens) + '\t' )
-    
-            
             for token in tokens:
                 if token not in vocabulary:
                     if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
                         continue
                     else:
                         print('new token!', token)
-                        if str(dateParser) in a_tag['href'] and str(a_tag['href']) not in checkLinks:
-                            database.write(str(token) + ', ')
-                            
                         # appends the data to the temporary vocabulary and to the spreadsheet
                         vocabulary.add(token)
                         sheet.append_row([token])
@@ -104,11 +86,6 @@ for a_tag in soup.find_all('a', href=True):
                         # tweets stuff
                         updateStatus(token, a_tag['href'],title)
                         time.sleep(5)
-                        
-            if str(dateParser) in a_tag['href'] and str(a_tag['href']) not in checkLinks:
-                database.write('\n')
 
         except Exception as e:
             print(e)
-
-database.close()
