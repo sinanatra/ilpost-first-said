@@ -1,0 +1,53 @@
+body {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    color: #00a1c5;
+    margin: 0px;
+    overflow: hidden;
+}
+
+h1,
+h2,
+p {
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+a{
+    color: #00a1c5;
+}
+
+.canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.description {
+    position: absolute;
+    width: 600px;
+    padding: 10px;
+    left: 25px;
+    top: 25px;
+    background: #e9e8e5;
+}
+
+.block {
+    display: block;
+    border: 1px solid #00a1c5;
+    background: white;
+    text-align: center;
+    min-width: 50px;
+    max-width: 150px;
+    height: auto;
+    z-index: 1;
+    position: absolute;
+}
+
+div.block {
+    padding: 10px;
+}
+
+#highlight {
+    background: gold;
+}
