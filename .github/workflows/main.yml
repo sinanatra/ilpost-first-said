@@ -3,9 +3,9 @@ name: Python application
 on:
   schedule:
     - cron:  '00 */8 * * *'
-  #push:
-    #branches:
-     # - master
+  push:
+    branches:
+      - master
 jobs:
   build:
 
@@ -35,29 +35,16 @@ jobs:
       run: |
           python html_proc.py  
           git status
-    - name: upload json
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Apply automatic changes
-        branch: master
-        commit_options: '--no-verify --signoff'
-        file_pattern: '*.json'
-        repository: .
-        commit_user_name: Giacomo Nanni Bot
-        commit_user_email: gn.nanni@gmail.com
-        commit_author: Author <actions@github.com>
+    #- name: upload json
+    #  uses: stefanzweifel/git-auto-commit-action@v4
+    #  with:
+     #   commit_message: Apply automatic changes
+      #  branch: master
+       # commit_options: '--no-verify --signoff'
+        #file_pattern: '*.json'
+        #repository: .
+        #commit_user_name: Giacomo Nanni Bot
+        #commit_user_email: gn.nanni@gmail.com
+        #commit_author: Author <actions@github.com>
         #tagging_message: 'v1.0.0'
-        push_options: '--force'
-    - name: upload tsv
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Apply automatic changes
-        branch: master
-        commit_options: '--no-verify --signoff'
-        file_pattern: '*.tsv'
-        repository: .
-        commit_user_name: Giacomo Nanni Bot
-        commit_user_email: gn.nanni@gmail.com
-        commit_author: Author <actions@github.com>
-        #tagging_message: 'v1.0.0'
-        push_options: '--force'
+        #push_options: '--force'
