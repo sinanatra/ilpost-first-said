@@ -1,2 +1,5 @@
 scraped/*
 /*/node_modules
+/*/yarn.lock
+/*/yarn-error.log
+sheet-274815-b5805997d72c.json
