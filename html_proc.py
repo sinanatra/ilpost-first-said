@@ -6,8 +6,8 @@ import urllib.request
 from bs4 import BeautifulSoup
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
-from datetime import datetime
 from pathlib import Path
+import lxml.etree as ET    
 from utils.tweet import updateStatus
 
 import gspread
@@ -26,66 +26,57 @@ vocabulary = set()
 for i in sheetValues:
     vocabulary.add(i[0])
     
-date = datetime.today().strftime('%Y-%m-%d')
-dateParser = datetime.today().strftime('%Y/%m/%d')
+opener = urllib.request.build_opener()
+tree = ET.parse(opener.open('https://www.ilpost.it/feed/'))
 
-headers = {
-    'User-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0'}
+for link in tree.findall('channel/item/link'):
 
-req = urllib.request.Request("https://www.ilpost.it" , None, headers)
-html = urllib.request.urlopen(req).read()
-soup = BeautifulSoup(html, features="lxml")
-previousUrl = ''
+    print('href: ', link.text)
+    try:
+        innerHtml = urllib.request.urlopen(link.text).read()
+        innerSoup = BeautifulSoup(innerHtml, features="lxml")
+        # ignore all scripts and css
+        for script in innerSoup(["script", "style"]):
+            script.extract()
+        
+        #ignore iframes
+        for div in innerSoup.find_all("blockquote", {'class':'twitter-tweet'}): 
+            div.decompose()
 
-for a_tag in soup.find_all('a', href=True):
-    if(str(a_tag['href']) not in previousUrl and 'www.ilpost.it/'+ str(dateParser) in a_tag['href']):
-        print('href: ', a_tag['href'])
-        previousUrl = str(a_tag['href'])
-        try:
-            innerHtml = urllib.request.urlopen(a_tag['href']).read()
-            innerSoup = BeautifulSoup(innerHtml, features="lxml")
+        for div in innerSoup.find_all("blockquote", {'class':'instagram-media'}):
+            div.decompose()
 
-            # ignore all scripts and css
-            for script in innerSoup(["script", "style"]):
-                script.extract()
-            
-            #ignore iframes
-            for div in innerSoup.find_all("blockquote", {'class':'twitter-tweet'}): 
-                div.decompose()
+        #get title
+        title = innerSoup.find("h1", {'class':'entry-title'}).get_text()
 
-            for div in innerSoup.find_all("blockquote", {'class':'instagram-media'}):
-                div.decompose()
+        # get  and cleans the text
+        text = innerSoup.find('article').get_text()
+        
+        lines = (line.strip() for line in text.splitlines())
+        chunks = (phrase.strip()
+                    for line in lines for phrase in line.split("  "))
+        text = '\n'.join(chunk for chunk in chunks if chunk)
 
-            #get title
-            title = innerSoup.find("h1", {'class':'entry-title'}).get_text()
+        # get tokens - ignore punctuation and capital letters
+        tokenizer = RegexpTokenizer(r'\w+')
+        tokens = tokenizer.tokenize(text)
+        
+        # remove duplicates
+        tokens = list(set(tokens))
+        
+        for token in tokens:
+            if token not in vocabulary:
+                if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
+                    continue
+                else:
+                    print('new token!', token)
+                    # appends the data to the temporary vocabulary and to the spreadsheet
+                    vocabulary.add(token)
+                    sheet.append_row([token])
 
-            # get  and cleans the text
-            text = innerSoup.find('article').get_text()
-            
-            lines = (line.strip() for line in text.splitlines())
-            chunks = (phrase.strip()
-                      for line in lines for phrase in line.split("  "))
-            text = '\n'.join(chunk for chunk in chunks if chunk)
+                    # tweets stuff
+                    updateStatus(token, link.text,title)
+                    time.sleep(5)
 
-            # get tokens - ignore punctuation and capital letters
-            tokenizer = RegexpTokenizer(r'\w+')
-            tokens = tokenizer.tokenize(text)
-            # remove duplicates
-            tokens = list(set(tokens))
-            
-            for token in tokens:
-                if token not in vocabulary:
-                    if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
-                        continue
-                    else:
-                        print('new token!', token)
-                        # appends the data to the temporary vocabulary and to the spreadsheet
-                        vocabulary.add(token)
-                        sheet.append_row([token])
-
-                        # tweets stuff
-                        updateStatus(token, a_tag['href'],title)
-                        time.sleep(5)
-
-        except Exception as e:
-            print(e)
+    except Exception as e:
+        print(e)
