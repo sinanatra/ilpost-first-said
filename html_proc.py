@@ -64,7 +64,11 @@ for link in tree.findall('channel/item/link'):
         # remove duplicates
         tokens = list(set(tokens))
         
-        for token in tokens:
+        # this should be shorter than twitter max limit
+        range_snippet = 50
+        
+        for i in range(len(tokens)):
+            token = tokens[i]
             if token not in vocabulary:
                 if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
                     continue
@@ -73,6 +77,18 @@ for link in tree.findall('channel/item/link'):
                     # appends the data to the temporary vocabulary and to the spreadsheet
                     vocabulary.add(token)
                     sheet.append_row([token])
+                    
+                    if i-range_snippet<0:
+                        begin_snippet = 0
+                    else:
+                        begin_snippet = i-range_snippet
+                    
+                    if i+range_snippet>len(tokens):
+                        end_snippet = len(tokens)
+                    else:
+                        end_snippet = i+range_snippet
+
+                    snippet = " ".join(tokens[begin_snippet:end_snippet])
 
                     # tweets stuff
                     updateStatus(token, link.text,title)
