@@ -64,7 +64,7 @@ for link in tree.findall('channel/item/link'):
         # remove duplicates
         tokens = list(set(tokens))
         
-        # this should be shorter than twitter max limit
+        # this x2 should be shorter than twitter max limit
         range_snippet = 50
         
         for i in range(len(tokens)):
