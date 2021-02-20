@@ -16,4 +16,4 @@ def updateStatus (status, link, title, finalsnippet):
     statusid = tweet.id_str
     # reply to tweet
     time.sleep(10)
-    api.update_status('@ilpostdice ' + finalsnippet '"' + 'appare in: ' +'" ' + link, in_reply_to_status_id = statusid, card_uri = 'tombstone://card')
+    api.update_status('@ilpostdice "' + finalsnippet + '" appare in: ' +'" ' + link, in_reply_to_status_id = statusid, card_uri = 'tombstone://card')
