@@ -64,19 +64,29 @@ for link in tree.findall('channel/item/link'):
         # remove duplicates
         tokens = list(set(tokens))
         
-        for token in tokens:
+        for i in range(len(tokens)):
+            token = tokens[i]
             if token not in vocabulary:
                 if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
                     continue
                 else:
                     print('new token!', token)
+                    
                     # appends the data to the temporary vocabulary and to the spreadsheet
                     vocabulary.add(token)
                     sheet.append_row([token])
+               
+                    range_snippet = 50
+                    start_index = text.find(token)
+                    end_index = start_index + len(token) 
+                    snippet = ''
+                    for i in range(start_index - range_snippet, end_index + range_snippet):
+                        snippet += text[i]   
+                    
+                    finalsnippet = ' '.join(snippet.split()[1:-1])+ ' ...'
 
                     # tweets stuff
-                    updateStatus(token, link.text,title)
+                    updateStatus(token, link.text, title, finalsnippet)
                     time.sleep(5)
-
     except Exception as e:
         print(e)
