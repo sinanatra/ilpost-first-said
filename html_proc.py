@@ -46,6 +46,10 @@ for link in tree.findall('channel/item/link'):
         for div in innerSoup.find_all("blockquote", {'class':'instagram-media'}):
             div.decompose()
 
+        #ignore tags
+        for div in innerSoup.find_all("a", {'rel':'tag'}):
+            div.decompose()
+
         #get title
         title = innerSoup.find("h1", {'class':'entry-title'}).get_text()
 
@@ -56,7 +60,6 @@ for link in tree.findall('channel/item/link'):
         chunks = (phrase.strip()
                     for line in lines for phrase in line.split("  "))
         text = '\n'.join(chunk for chunk in chunks if chunk)
-
         # get tokens - ignore punctuation and capital letters
         tokenizer = RegexpTokenizer(r'\w+')
         tokens = tokenizer.tokenize(text)
