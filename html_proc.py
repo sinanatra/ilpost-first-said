@@ -9,7 +9,7 @@ from nltk.tokenize import RegexpTokenizer
 from pathlib import Path
 import pymongo
 import lxml.etree as ET    
-from utils.tweet import updateStatus
+# from utils.tweet import updateStatus
 
 client = pymongo.MongoClient("os.environ['MONGO']")
 db = client.ilpost
@@ -79,7 +79,7 @@ for link in tree.findall('channel/item/link'):
                     finalsnippet = ' '.join(snippet.split()[1:-1])+ ' ...'
 
                     # tweets stuff
-                    #updateStatus(token, link.text, title, finalsnippet)
+                    updateStatus(token, link.text, title, finalsnippet)
                     time.sleep(5)
     except Exception as e:
         print(e)
