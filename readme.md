@@ -12,6 +12,6 @@ To start from scratch, download ilPost (or another newspaper website). You can u
 
 ``` wget --limit-rate=200k --follow-tags=a --no-clobber --convert-links --random-wait -r -E -e robots=off -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.102 Safari/537.36" -A html --domain=www.ilpost.it https://www.ilpost.it/``` 
 
-~~Lauch `dataset_proc.py` to create the dictionary. ~~<-This has been replaced by Google sheet
+~~Lauch `dataset_proc.py` to create the dictionary. ~~ <-This has been replaced by Mongo DB
 
 Run `html_proc.py` to launch the script.
