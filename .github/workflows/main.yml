@@ -3,9 +3,9 @@ name: Python application
 on:
   schedule:
     - cron:  '00 */2 * * *'
-  push:
-    branches:
-      - master
+  #push:
+  #  branches:
+  #    - master
 jobs:
   build:
 
