@@ -11,7 +11,7 @@ import pymongo
 import lxml.etree as ET    
 # from utils.tweet import updateStatus
 
-client = pymongo.MongoClient("os.environ['MONGO']")
+client = pymongo.MongoClient(os.environ['MONGO'])
 db = client.ilpost
 words = db.words
     
