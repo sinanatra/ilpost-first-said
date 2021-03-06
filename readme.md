@@ -2,7 +2,7 @@
 
 A twitter bot to track when the newspaper IlPost publishes a word for the first time in history. running at: [@ilPostDice](https://twitter.com/ilpostdice). Largely inspired by the work of Max Bittker.
 
-It also replies to each tweet with a few words of source-text context, and a link to the originalarticle.
+It also replies to each tweet with a few words of source-text context, and a link to the original article.
 
 Basic architecture
 ----------
