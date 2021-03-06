@@ -9,7 +9,7 @@ from nltk.tokenize import RegexpTokenizer
 from pathlib import Path
 import pymongo
 import lxml.etree as ET    
-# from utils.tweet import updateStatus
+from utils.tweet import updateStatus
 
 client = pymongo.MongoClient(os.environ['MONGO'])
 db = client.ilpost
