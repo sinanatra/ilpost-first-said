@@ -23,9 +23,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: download secret
       env:
-        SHEET_JSON: ${{ secrets.SHEET_JSON }}
-      run: |
-        echo "$SHEET_JSON" > sheet-274815-b5805997d72c.json
+        MONGO: ${{ secrets.MONGO }}
     - name: html parser
       env:
         TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
@@ -35,16 +33,3 @@ jobs:
       run: |
           python html_proc.py  
           git status
-    #- name: upload json
-    #  uses: stefanzweifel/git-auto-commit-action@v4
-    #  with:
-     #   commit_message: Apply automatic changes
-      #  branch: master
-       # commit_options: '--no-verify --signoff'
-        #file_pattern: '*.json'
-        #repository: .
-        #commit_user_name: Giacomo Nanni Bot
-        #commit_user_email: gn.nanni@gmail.com
-        #commit_author: Author <actions@github.com>
-        #tagging_message: 'v1.0.0'
-        #push_options: '--force'
