@@ -11,15 +11,16 @@ import pymongo
 import lxml.etree as ET    
 from utils.tweet import updateStatus
 
+# Connects to the Mongo instance
 client = pymongo.MongoClient(os.environ['MONGO'])
 db = client.ilpost
 words = db.words
-    
+
+# Parses newspaper's feed
 opener = urllib.request.build_opener()
 tree = ET.parse(opener.open('https://www.ilpost.it/feed/'))
 
 for link in tree.findall('channel/item/link'):
-
     print('href: ', link.text)
     try:
         innerHtml = urllib.request.urlopen(link.text).read()
@@ -27,24 +28,19 @@ for link in tree.findall('channel/item/link'):
         # ignore all scripts and css
         for script in innerSoup(["script", "style"]):
             script.extract()
-        
         #ignore iframes
         for div in innerSoup.find_all("blockquote", {'class':'twitter-tweet'}): 
             div.decompose()
-
         for div in innerSoup.find_all("blockquote", {'class':'instagram-media'}):
             div.decompose()
-
         #ignore tags
         for div in innerSoup.find_all("a", {'rel':'tag'}):
             div.decompose()
 
         #get title
         title = innerSoup.find("h1", {'class':'entry-title'}).get_text()
-
         # get  and cleans the text
         text = innerSoup.find('article').get_text()
-        
         lines = (line.strip() for line in text.splitlines())
         chunks = (phrase.strip()
                     for line in lines for phrase in line.split("  "))
@@ -52,7 +48,6 @@ for link in tree.findall('channel/item/link'):
         # get tokens - ignore punctuation and capital letters
         tokenizer = RegexpTokenizer(r'\w+')
         tokens = tokenizer.tokenize(text)
-        
         # remove duplicates
         tokens = list(set(tokens))
         
@@ -65,20 +60,17 @@ for link in tree.findall('channel/item/link'):
                     continue
                 else:
                     print('new token!', token)
-                    
+                    #Adds word to Mongo
                     x = words.insert_one({ "word": token })
-        
+                    #Defines text snippet
                     range_snippet = 50
                     start_index = text.find(token)
-                    
                     end_index = start_index + len(token) 
                     snippet = ''
                     for i in range(start_index - range_snippet, end_index + range_snippet):
                         snippet += text[i]   
-                    
                     finalsnippet = ' '.join(snippet.split()[1:-1])+ ' ...'
-
-                    # tweets stuff
+                    # tweets word, snippet and link
                     updateStatus(token, link.text, title, finalsnippet)
                     time.sleep(5)
     except Exception as e:
