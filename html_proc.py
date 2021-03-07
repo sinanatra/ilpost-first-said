@@ -51,27 +51,38 @@ for link in tree.findall('channel/item/link'):
         # remove duplicates
         tokens = list(set(tokens))
         
-        for i in range(len(tokens)):
-            token = tokens[i]
-            if words.find_one({"word": token}):
+        # Check if exists in db
+        database_tokens = list(words.find({ "word": { "$in": tokens}} ))
+        
+        # Check differences with tokens
+        cleaned_tokens = []
+
+        for item in database_tokens:
+            word = item['word'][0]
+            cleaned_tokens.append(word)
+
+        different_tokens = list(set(tokens) - set(cleaned_tokens))
+        for token in different_tokens:
+            if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
                 continue
             else:
-                if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
-                    continue
-                else:
-                    print('new token!', token)
-                    #Adds word to Mongo
-                    x = words.insert_one({ "word": token })
-                    #Defines text snippet
-                    range_snippet = 50
-                    start_index = text.find(token)
-                    end_index = start_index + len(token) 
-                    snippet = ''
-                    for i in range(start_index - range_snippet, end_index + range_snippet):
-                        snippet += text[i]   
-                    finalsnippet = ' '.join(snippet.split()[1:-1])+ ' ...'
-                    # tweets word, snippet and link
-                    updateStatus(token, link.text, title, finalsnippet)
-                    time.sleep(5)
+                print('new token!', token)
+
+                #Adds word to Mongo
+                x = words.insert_one({ "word": token })
+
+                #Defines text snippet
+                range_snippet = 50
+                start_index = text.find(token)
+                end_index = start_index + len(token) 
+                snippet = ''
+
+                for i in range(start_index - range_snippet, end_index + range_snippet):
+                    snippet += text[i]   
+                finalsnippet = ' '.join(snippet.split()[1:-1])+ ' ...'
+                
+                # tweets word, snippet and link
+                updateStatus(token, link.text, title, finalsnippet)
+                time.sleep(5)
     except Exception as e:
         print(e)
