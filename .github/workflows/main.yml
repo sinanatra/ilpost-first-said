@@ -2,7 +2,12 @@ name: Python application
 
 on:
   schedule:
-    - cron:  '00 */2 * * *'
+    - cron:  '00 */2 * * *'  
+  workflow_dispatch:
+    inputs:
+      manualrun:
+        description: 'Manually run workflow'     
+        required: true
   #push:
   #  branches:
   #    - master
