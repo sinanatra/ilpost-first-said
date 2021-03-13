@@ -73,7 +73,7 @@ for link in tree.findall('channel/item/link'):
 
                 #Adds word to Mongo
                 #x = words.insert_one({ "word": token })
-                x= words.replace_one({'word': token}, upsert=True)
+                x= words.update_one({'word': token},{'$set': {'word': token}}, upsert=True)
 
                 tweeted.append(token)
 
