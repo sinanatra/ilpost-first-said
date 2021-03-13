@@ -65,8 +65,8 @@ for link in tree.findall('channel/item/link'):
 
         different_tokens = list(set(tokens) - set(cleaned_tokens))
         print(different_tokens)
-        for token in different_tokens and token not in tweeted:
-            if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
+        for token in different_tokens:
+            if any(str.isdigit(c) or str.isupper(c) for c in token) is True or token in tweeted:
                 continue
             else:
                 print('new token!', token)
