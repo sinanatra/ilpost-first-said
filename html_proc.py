@@ -62,6 +62,7 @@ for link in tree.findall('channel/item/link'):
             cleaned_tokens.append(word)
 
         different_tokens = list(set(tokens) - set(cleaned_tokens))
+        print(different_tokens)
         for token in different_tokens:
             if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
                 continue
