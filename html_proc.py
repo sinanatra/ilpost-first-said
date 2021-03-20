@@ -19,8 +19,6 @@ words = db.words
 # Parses newspaper's feed
 opener = urllib.request.build_opener()
 tree = ET.parse(opener.open('https://www.ilpost.it/feed/'))
-#takes track of previously tweeted
-tweeted = []
 
 for link in tree.findall('channel/item/link'):
     print('href: ', link.text)
@@ -66,16 +64,14 @@ for link in tree.findall('channel/item/link'):
 
         different_tokens = list(set(tokens) - set(cleaned_tokens))
         for token in different_tokens:
-            if any(str.isdigit(c) or str.isupper(c) for c in token) is True or token in tweeted:
+            if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
                 continue
             else:
                 print('new token!', token)
 
                 #Adds word to Mongo
                 #x = words.insert_one({ "word": token })
-                x= words.update_one({'word': token},{'$set': {'word': token}}, upsert=True)
-
-                tweeted.append(token)
+                x = words.update_one({'word': token},{'$set': {'word': token}}, upsert=True)
 
                 #Defines text snippet
                 range_snippet = 50
