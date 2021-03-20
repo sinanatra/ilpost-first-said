@@ -60,7 +60,8 @@ for link in tree.findall('channel/item/link'):
         cleaned_tokens = []
 
         for item in database_tokens:
-            word = item['word'][0]
+            word = ''
+            word = word.join(item['word'])
             cleaned_tokens.append(word)
 
         different_tokens = list(set(tokens) - set(cleaned_tokens))
