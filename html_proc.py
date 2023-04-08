@@ -18,7 +18,7 @@ words = db.words
 
 # Parses newspaper's feed
 opener = urllib.request.build_opener()
-tree = ET.parse(opener.open('https://www.ilpost.it/feed/'))
+tree = ET.parse(opener.open('https://rss.draghetti.it/ilpost.xml')) # https://www.ilpost.it/feed/ does not work anymore?
 
 for link in tree.findall('channel/item/link'):
     print('href: ', link.text)
