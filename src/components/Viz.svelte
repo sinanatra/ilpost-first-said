@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { each } from 'svelte/internal';
 	import { writable } from 'svelte/store';
 	export let article;
 
@@ -7,11 +8,11 @@
 	let words = article.content.replace(/<[^>]+>/g, '').split(' ');
 
 	let newWords = [];
+	$: addedWords = new Set();
 
 	async function fetchData() {
 		const res = await fetch(`/api/get`);
 		newWords = await res.json();
-		newWords.push('del');
 		return newWords;
 	}
 
@@ -25,7 +26,7 @@
 			element.addEventListener('endEvent', () => {
 				let word = element.parentElement?.textContent;
 				if (wordInNewWords(word)) {
-					document.querySelector('.newWords').innerHTML += word + ' ';
+					addedWords.add(word);
 				}
 			});
 		});
@@ -87,7 +88,11 @@
 				{/if}
 			{/each}
 		</svg>
-		<div class="newWords" />
+		<div class="newWords">
+			{#each Array.from(addedWords) as w}
+				<span>{w}</span>
+			{/each}
+		</div>
 	{/if}
 </div>
 <input type="range" bind:value={time} min="10" max="200" />
@@ -108,7 +113,7 @@
 	.chart {
 		position: relative;
 		width: 100%;
-		max-width: 1240px;
+		max-width: 1280px;
 		margin: 0 auto;
 		box-shadow: 0 30px 40px rgba(0, 0, 0, 0.1);
 	}
