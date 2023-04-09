@@ -5,7 +5,6 @@
 
 	export let data;
 	let posts = data.posts;
-
 </script>
 
 {#if data}
@@ -17,13 +16,7 @@
 {/if}
 
 <style>
-	section {
-		display: flex;
-	}
-
-	:global(.container > *) {
-		flex: 1;
-		max-width: 300px;
-		padding: 0 .5rem;
-	}
+    :global(body) {
+        margin: 0;
+    }
 </style>

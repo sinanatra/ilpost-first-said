@@ -1,1 +1,0 @@
-qua le paroline

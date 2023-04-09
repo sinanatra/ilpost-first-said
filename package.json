@@ -26,6 +26,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"feedparser": "^2.2.10"
+		"date-fns": "^2.29.3",
+		"feedparser": "^2.2.10",
+		"mongodb": "^5.2.0"
 	}
 }

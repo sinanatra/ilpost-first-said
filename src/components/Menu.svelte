@@ -3,12 +3,11 @@
 </script>
 
 <nav>
-    
-	{#if posts}
+	<!-- {#if posts}
 		{#each posts as post}
 			<div>
 				{post.title}
 			</div>
 		{/each}
-	{/if}
+	{/if} -->
 </nav>
