@@ -1,11 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
-	import { each } from 'svelte/internal';
-	import { writable } from 'svelte/store';
-	export let article;
+	import { articleData } from '../routes/store';
 
 	let time = 120;
-	let words = article.content.replace(/<[^>]+>/g, '').split(' ');
+	$: words = $articleData.content.replace(/<[^>]+>/g, '').split(' ');
 
 	let newWords = [];
 	$: addedWords = new Set();
@@ -79,8 +77,8 @@
 								attributeName="startOffset"
 								from="0%"
 								to="110%"
-								begin="{i * 1}s"
-								end="{i * 1 + time}s"
+								begin="{i * .5}s"
+								end="{i * .5 + time}s"
 								dur="{time}s"
 							/>
 						</textPath>
