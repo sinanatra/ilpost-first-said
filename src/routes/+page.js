@@ -4,9 +4,9 @@ async function getFeed(url) {
     return data.items;
 }
 
-export const load = async () => {
-    const posts = await getFeed('https://rss.draghetti.it/ilpost.xml');
-    return {
-        posts
-    };
-};
+// export const load = async () => {
+//     const posts = await getFeed('https://rss.draghetti.it/ilpost.xml');
+//     return {
+//         posts
+//     };
+// };
