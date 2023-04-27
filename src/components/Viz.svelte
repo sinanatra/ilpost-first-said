@@ -95,7 +95,7 @@
 		position: relative;
 		width: 100%;
 		padding-left: .5rem;
-		/* max-width: 900px; */
+		max-width: 1240px;
 		margin: 0 auto;
 	}
 
