@@ -65,7 +65,7 @@
 							attributeName="startOffset"
 							from="0%"
 							to="110%"
-							begin="{i * 1}s"
+							begin="{i * 2}s"
 							end="{i + time}s"
 							dur="{time}s"
 							repeatCount="indefinite"
