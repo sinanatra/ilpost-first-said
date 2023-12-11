@@ -78,7 +78,7 @@ for link in tree.findall('channel/item/link'):
 
                 for i in range(start_index - range_snippet, end_index + range_snippet):
                     snippet += text[i]   
-                finalsnippet = ' '.join(snippet.split()[1:-1])+ ' ...'
+                finalsnippet = ' '.join(snippet.split()[1:-1])
                 
                 #Adds word to Mongo
                 #x = words.insert_one({ "word": token })
