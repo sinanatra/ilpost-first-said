@@ -3,7 +3,7 @@ from telegram import Bot
 
 
 #os.environ['TELEGRAM_TOKEN']
-telegram_bot = Bot(token='os.environ['TELEGRAM_TOKEN']')
+telegram_bot = Bot(token=os.environ['TELEGRAM_TOKEN'])
 
 async def updateStatus(status, link, title, finalsnippet):
     telegram_channel = '@nuoveparoledelpost'
