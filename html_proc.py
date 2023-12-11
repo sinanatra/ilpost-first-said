@@ -11,6 +11,7 @@ import pymongo
 import lxml.etree as ET    
 from utils.telegramBot import updateStatus
 import asyncio
+from datetime import datetime
 
 # Connects to the Mongo instance
 client = pymongo.MongoClient(os.environ['MONGO'])
@@ -90,7 +91,8 @@ for link in tree.findall('channel/item/link'):
                         '$set': {
                             'word': token,
                             'context': finalsnippet,
-                            'url': link.text
+                            'url': link.text,
+                             'date_added': datetime.now() 
                         }
                     },
                     upsert=True
