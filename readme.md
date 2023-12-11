@@ -1,6 +1,6 @@
 # [@ilPostDice](https://twitter.com/ilpostdice)
 
-A Telegram bot that tracks when the newspaper IlPost publishes a word for the first time. Running at: [@ilPostDice]([https://twitter.com/ilpostdice](https://t.me/nuoveparoledelpost)). Largely inspired by the work of Max Bittker.
+A Telegram bot that tracks when the newspaper IlPost publishes a word for the first time. Running at: [@ilPostDice](https://t.me/nuoveparoledelpost). Largely inspired by the work of Max Bittker.
 
 <s>A twitter bot that tracks when the newspaper IlPost publishes a word for the first time. Running at: [@ilPostDice](https://twitter.com/ilpostdice). Largely inspired by the work of Max Bittker.
 It additionally replies to each tweet with a few words of context and a link to the original article.
