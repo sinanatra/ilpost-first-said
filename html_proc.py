@@ -70,12 +70,6 @@ for link in tree.findall('channel/item/link'):
                 continue
             else:
                 print('new token!', token)
-
-                #Adds word to Mongo
-                #x = words.insert_one({ "word": token })
-                x = words.update_one({'word': token},{'$set': {'word': token}}, upsert=True)
-
-
                 #Defines text snippet
                 range_snippet = 50
                 start_index = text.find(token)
@@ -86,11 +80,25 @@ for link in tree.findall('channel/item/link'):
                     snippet += text[i]   
                 finalsnippet = ' '.join(snippet.split()[1:-1])+ ' ...'
                 
-                # tweets word, snippet and link
+                #Adds word to Mongo
+                #x = words.insert_one({ "word": token })
+                #x = words.update_one({'word': token},{'$set': {'word': token}}, upsert=True)
+
+                x = words.update_one(
+                    {'word': token},
+                    {
+                        '$set': {
+                            'word': token,
+                            'context': finalsnippet,
+                            'url': link.text
+                        }
+                    },
+                    upsert=True
+                )
+
+                # tweets w
                 loop = asyncio.get_event_loop()
                 loop.run_until_complete(updateStatus(token, link.text, title, finalsnippet))
-
-
                 time.sleep(5)
     except Exception as e:
         print(e)
