@@ -9,7 +9,8 @@ from nltk.tokenize import RegexpTokenizer
 from pathlib import Path
 import pymongo
 import lxml.etree as ET    
-from utils.tweet import updateStatus
+from utils.telegramBot import updateStatus
+import asyncio
 
 # Connects to the Mongo instance
 client = pymongo.MongoClient(os.environ['MONGO'])
@@ -74,6 +75,7 @@ for link in tree.findall('channel/item/link'):
                 #x = words.insert_one({ "word": token })
                 x = words.update_one({'word': token},{'$set': {'word': token}}, upsert=True)
 
+
                 #Defines text snippet
                 range_snippet = 50
                 start_index = text.find(token)
@@ -85,7 +87,10 @@ for link in tree.findall('channel/item/link'):
                 finalsnippet = ' '.join(snippet.split()[1:-1])+ ' ...'
                 
                 # tweets word, snippet and link
-                updateStatus(token, link.text, title, finalsnippet)
+                loop = asyncio.get_event_loop()
+                loop.run_until_complete(updateStatus(token, link.text, title, finalsnippet))
+
+
                 time.sleep(5)
     except Exception as e:
         print(e)
