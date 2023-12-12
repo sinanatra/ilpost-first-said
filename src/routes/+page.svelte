@@ -13,9 +13,9 @@
 			href="https://www.ilpost.it/"
 			target="_blank">ilPost</a
 		>
-		negli ultimi 5 mesi.
+		negli ultimi 30 giorni.
 		<div class="filters">
-			Ordina per:
+			Ordine:
 			<label>
 				<input
 					type="radio"
@@ -24,7 +24,7 @@
 					value="Time"
 					bind:group={sortingOption}
 				/>
-				Data
+				Temporale
 			</label>
 			<label>
 				<input
@@ -34,7 +34,7 @@
 					value="Alphabetically"
 					bind:group={sortingOption}
 				/>
-				Alfabeto
+				Alfabetico
 			</label>
 		</div>
 	</div>
@@ -47,13 +47,15 @@
 		<a target="_blank" href="https://twitter.com/ilpostdice">Twitter</a>, e per
 		<a target="_blank" href="https://t.me/nuoveparoledelpost">Telegram</a>
 	</div>
-	<div>Realizzato da <a target="_blank" href="https://giacomo.website/">Giacomo</a></div>
+	<div>Realizzato da <a target="_blank" href="https://giacomo.website/">Giacomo Nanni</a></div>
 </section>
 <Viz {sortingOption} />
 
 <style>
 	:global(body) {
-		font-family: sans-serif;
+		font-family: Georgia, 'Times New Roman', Times, serif;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
 		margin: 0;
 		padding: 0;
 	}
@@ -63,7 +65,7 @@
 	}
 
 	a {
-		color: blue;
+		color: #2da8c6;
 	}
 
 	.intro {
@@ -86,8 +88,13 @@
 		line-height: clamp(24px, 2.8vw, 2.8vw);
 	}
 
-	.filters, .filters * {
+	.filters,
+	.filters * {
 		cursor: pointer;
 		user-select: none;
+	}
+
+	 input[type=radio]{
+		/* accent-color: #2da8c6; */
 	}
 </style>

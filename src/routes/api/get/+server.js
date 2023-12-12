@@ -12,8 +12,19 @@ export const GET = async ({ request, url }) => {
             $gte: new ObjectId(Math.floor(start.getTime() / 1000).toString(16) + "0000000000000000"),
             $lt: new ObjectId(Math.floor(end.getTime() / 1000).toString(16) + "0000000000000000")
         }
-    }).toArray();
+    }).sort({ _id: -1 }).toArray();
 
-    const data = await res.map(({ word, date_added, url, context }) => ({ word, date_added, url, context }));
+
+
+    // REMOVES STUFFFF
+    // await db.collection('words').find({
+    //     _id: {
+    //         $gte: new ObjectId(Math.floor(start.getTime() / 1000).toString(16) + "0000000000000000"),
+    //         $lt: new ObjectId(Math.floor(end.getTime() / 1000).toString(16) + "0000000000000000")
+    //     }
+    // }).sort({ _id: -1 }).limit(200).forEach(doc => db.collection('words').deleteOne({ _id: doc._id }))
+
+
+    const data = await res.map(({ word, date_added, url, context, _id }) => ({ word, date_added, url, context, _id }));
     return new Response(JSON.stringify(data), { status: 200 });
 }
