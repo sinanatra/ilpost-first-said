@@ -61,16 +61,15 @@
 			</g>
 			<g bind:this={g}>
 				{#each data as d, i}
-					<a href={d.url} target="_blank">
-						<text x={xScale(d.date)} y={40 + i * 22}>
-							<!-- <tspan class="text">...</tspan> -->
-							<tspan class="text">{@html d.snippets[0]}</tspan><tspan class="highlight"
-								>{d.word}</tspan
-							><tspan class="text">{@html d.snippets[1]}</tspan>
-							<!-- <tspan class="text">...</tspan> -->
-							<tspan class="date">{timeFormat('%Y-%m-%d')(d.date)}</tspan>
-						</text>
-					</a>
+					<text x={xScale(d.date)} y={40 + i * 22}>
+						<!-- <tspan class="text">...</tspan> -->
+						<tspan class="text">{@html d.snippets[0]}</tspan><tspan class="highlight"
+							>{d.word}</tspan
+						><tspan class="text">{@html d.snippets[1]}</tspan><tspan class="text">...</tspan>
+						<a href={d.url} target="_blank">
+							<tspan class="date">Pubblicato il: {timeFormat('%Y-%m-%d')(d.date)}↗</tspan>
+						</a>
+					</text>
 				{/each}
 			</g>
 		</svg>
@@ -83,8 +82,8 @@
 		padding: 10px;
 	}
 
-	a:hover {
-		fill: #ffd53d;
+	a tspan:hover {
+		fill: #2da8c6;
 	}
 
 	.text {
@@ -95,9 +94,10 @@
 		fill: #2da8c6;
 	}
 
-	.date {
+	.date,
+	a {
 		fill: #666;
-		font-size: 0.6em;
+		font-size: 0.8em;
 	}
 
 	.data {

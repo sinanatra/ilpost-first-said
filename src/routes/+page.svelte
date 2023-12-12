@@ -43,7 +43,9 @@
 		Potete vedere come funziona su <a
 			target="_blank"
 			href="https://github.com/sinanatra/ilpost-first-said">Github</a
-		>, inizialmente pensato come Bot su
+		>. 
+		<br>
+		Inizialmente pensato come Bot su
 		<a target="_blank" href="https://twitter.com/ilpostdice">Twitter</a>, e per
 		<a target="_blank" href="https://t.me/nuoveparoledelpost">Telegram</a>
 	</div>
@@ -72,7 +74,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 10px;
-		padding: 10px 10px 10px 10px;
+		padding: 5px;
 		margin-bottom: 10px;
 		border-bottom: 1px solid;
 	}
