@@ -22,8 +22,10 @@ words = db.words
 opener = urllib.request.build_opener()
 tree = ET.parse(opener.open('https://rss.draghetti.it/ilpost.xml')) # https://www.ilpost.it/feed/ does not work anymore?
 
-for link in tree.findall('channel/item/link'):
-    print('href: ', link.text)
+for item in tree.findall('channel/item'):
+    link = item.find('link')
+    date = item.find('pubDate')
+    pub_date = datetime.strptime(date.text, '%a, %d %b %Y %H:%M:%S %z').strftime('%Y-%m-%dT%H:%M:%S.%f%z')
     try:
         innerHtml = urllib.request.urlopen(link.text).read()
         innerSoup = BeautifulSoup(innerHtml, features="lxml")
@@ -71,6 +73,7 @@ for link in tree.findall('channel/item/link'):
                 continue
             else:
                 print('new token!', token)
+                continue
                 #Defines text snippet
                 range_snippet = 50
                 start_index = text.find(token)
@@ -92,7 +95,7 @@ for link in tree.findall('channel/item/link'):
                             'word': token,
                             'context': finalsnippet,
                             'url': link.text,
-                             'date_added': datetime.now() 
+                             'date_added': pub_date #datetime.now() 
                         }
                     },
                     upsert=True
