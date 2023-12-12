@@ -11,8 +11,7 @@
 	let xAxis;
 
 	$: w = g?.getBoundingClientRect().width;
-	$: h = g?.getBoundingClientRect().height + 20;
-	$: uniqueDates = [...new Set(data.map((item) => timeFormat('%Y-%m-%d')(item?.date)))];
+	$: h = g?.getBoundingClientRect().height + 22;
 
 	async function fetchData() {
 		const res = await fetch(`/api/get`);
@@ -33,7 +32,7 @@
 		data = await fetchData();
 		xScale = scaleTime()
 			.domain([data[0]?.date, data[data.length - 1]?.date])
-			.range([0, 100]);
+			.range([0, 300]);
 		xAxis = axisBottom(xScale);
 	});
 
@@ -44,6 +43,8 @@
 			data = data.sort((a, b) => a.word.localeCompare(b.word));
 		}
 	}
+
+	$: uniqueDates = [...new Set(data.map((item) => timeFormat('%Y-%m-%d')(item?.date)))].sort();
 </script>
 
 <section>
@@ -53,9 +54,9 @@
 		<svg bind:this={svg} height="{h || 100}px" width="{w || 100}px">
 			<g class="dates">
 				{#each uniqueDates as d, i}
-					{#if i % 20 === 0}
-						<text class="data" x={xScale(new Date(d))} y="10">{d}</text>
-						<line x1={xScale(new Date(d))} y1="10" x2={xScale(new Date(d))} y2={h} />
+					{#if i % 5 === 0}
+						<text class="date" x={xScale(new Date(d))} y="10">{d}</text>
+						<line x1={xScale(new Date(d))} y1="14" x2={xScale(new Date(d))} y2={h} />
 					{/if}
 				{/each}
 			</g>
@@ -100,13 +101,8 @@
 		font-size: 0.8em;
 	}
 
-	.data {
-		fill: #a2a2a2;
-		text-anchor: start;
-	}
-
 	line {
-		stroke: #a2a2a2;
-		stroke-dasharray: 1, 2;
+		stroke: #b6b6b6;
+		stroke-dasharray: 8, 8;
 	}
 </style>

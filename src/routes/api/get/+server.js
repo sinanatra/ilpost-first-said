@@ -11,6 +11,9 @@ export const GET = async ({ request, url }) => {
         _id: {
             $gte: new ObjectId(Math.floor(start.getTime() / 1000).toString(16) + "0000000000000000"),
             $lt: new ObjectId(Math.floor(end.getTime() / 1000).toString(16) + "0000000000000000")
+        },
+        word: {
+            $regex: /\w{4,}/ // Match words with length greater than 3
         }
     }).sort({ _id: -1 }).toArray();
 
