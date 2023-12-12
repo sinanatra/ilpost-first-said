@@ -73,7 +73,7 @@ for item in tree.findall('channel/item'):
                 continue
             else:
                 print('new token!', token)
-                continue
+   
                 #Defines text snippet
                 range_snippet = 50
                 start_index = text.find(token)
