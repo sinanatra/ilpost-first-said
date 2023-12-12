@@ -63,11 +63,11 @@
 				{#each data as d, i}
 					<a href={d.url} target="_blank">
 						<text x={xScale(d.date)} y={40 + i * 22}>
-							<tspan class="text">...</tspan>
-							<tspan class="text">{d.snippets[0]}</tspan>
-							<tspan class="highlight">{d.word}</tspan>
-							<tspan class="text">{d.snippets[1]}</tspan>
-							<tspan class="text">...</tspan>
+							<!-- <tspan class="text">...</tspan> -->
+							<tspan class="text">{@html d.snippets[0]}</tspan><tspan class="highlight"
+								>{d.word}</tspan
+							><tspan class="text">{@html d.snippets[1]}</tspan>
+							<!-- <tspan class="text">...</tspan> -->
 							<tspan class="date">{timeFormat('%Y-%m-%d')(d.date)}</tspan>
 						</text>
 					</a>
