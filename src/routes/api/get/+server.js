@@ -2,7 +2,7 @@ import db from "$lib/db"
 import { ObjectId } from 'mongodb';
 
 const now = new Date();
-const start = new Date(now - 668 * 60 * 60 * 1000);
+const start = new Date(now - 150 * 24 * 60 * 60 * 1000); // 30 days ago
 const end = now;
 
 export const GET = async ({ request, url }) => {
@@ -14,6 +14,6 @@ export const GET = async ({ request, url }) => {
         }
     }).toArray();
 
-    const data = await res.map(({ word }) => word); 
+    const data = await res.map(({ word, date_added, url, context }) => ({ word, date_added, url, context }));
     return new Response(JSON.stringify(data), { status: 200 });
 }
