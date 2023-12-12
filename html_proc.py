@@ -15,6 +15,7 @@ from datetime import datetime
 
 # Connects to the Mongo instance
 client = pymongo.MongoClient(os.environ['MONGO'])
+
 db = client.ilpost
 words = db.words
 
@@ -23,10 +24,10 @@ opener = urllib.request.build_opener()
 tree = ET.parse(opener.open('https://rss.draghetti.it/ilpost.xml')) # https://www.ilpost.it/feed/ does not work anymore?
 
 for item in tree.findall('channel/item'):
-    link = item.find('link')
-    date = item.find('pubDate')
-    pub_date = datetime.strptime(date.text, '%a, %d %b %Y %H:%M:%S %z').strftime('%Y-%m-%dT%H:%M:%S.%f%z')
     try:
+        link = item.find('link')
+        date = item.find('pubDate')
+        pub_date = datetime.strptime(date.text, '%a, %d %b %Y %H:%M:%S %z').strftime('%Y-%m-%dT%H:%M:%S.%f%z')
         innerHtml = urllib.request.urlopen(link.text).read()
         innerSoup = BeautifulSoup(innerHtml, features="lxml")
         # ignore all scripts and css
