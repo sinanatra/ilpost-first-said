@@ -23,7 +23,7 @@
 				date: new Date(d.date_added),
 				snippets: d.context.split(d.word)
 			}))
-			.sort((a, b) => a._id.toString().localeCompare(b._id.toString()));
+			.sort((a, b) => b.date_added.toString().localeCompare(a.date_added.toString()));
 
 		return datum;
 	}
@@ -38,13 +38,17 @@
 
 	$: {
 		if (sortingOption == 'Time') {
-			data = data.sort((a, b) => a._id.toString().localeCompare(b._id.toString()));
+			data = data.sort((a, b) => b.date_added.toString().localeCompare(a.date_added.toString()));
 		} else if (sortingOption == 'Alphabetically') {
 			data = data.sort((a, b) => a.word.localeCompare(b.word));
 		}
 	}
 
-	$: uniqueDates = [...new Set(data.map((item) => timeFormat('%Y-%m-%d')(item?.date)))].sort();
+	$: uniqueDates = [...new Set(data.map((item) => timeFormat('%Y-%m-%d')(item?.date)))].sort(
+		(a, b) => b.localeCompare(a)
+	);
+
+	$: console.log(uniqueDates);
 </script>
 
 <section>
