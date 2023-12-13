@@ -22,7 +22,7 @@
 		property="og:description"
 		content="Questa visualizzazione mostra le parole che sono state citate per la prima volta sul quotidiano ilPost negli ultimi 30 giorni."
 	/>
-	<meta property="og:image" content="./cover.png" />
+	<meta property="og:image" content="https://ilpostdice.giacomo.website/cover.png" />
 
 	<meta property="twitter:card" content="summary_large_image" />
 	<meta property="twitter:url" content="https://ilpostdice.giacomo.website/" />
@@ -31,7 +31,7 @@
 		property="twitter:description"
 		content="Questa visualizzazione mostra le parole che sono state citate per la prima volta sul quotidiano ilPost negli ultimi 30 giorni."
 	/>
-	<meta property="twitter:image" content="./cover.png" />
+	<meta property="twitter:image" content="https://ilpostdice.giacomo.website/cover.png" />
 </svelte:head>
 <section class="intro">
 	<div class="large">
