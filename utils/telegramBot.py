@@ -1,6 +1,9 @@
 import os
 from telegram import Bot
-
+# localhost
+# from dotenv import load_dotenv
+# load_dotenv()
+# localhost
 
 #os.environ['TELEGRAM_TOKEN']
 telegram_bot = Bot(token=os.environ['TELEGRAM_TOKEN'])

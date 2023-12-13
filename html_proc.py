@@ -13,6 +13,11 @@ from utils.telegramBot import updateStatus
 import asyncio
 from datetime import datetime
 
+# localhost
+# from dotenv import load_dotenv
+# load_dotenv()
+# localhost
+
 # Connects to the Mongo instance
 client = pymongo.MongoClient(os.environ['MONGO'])
 
@@ -21,7 +26,7 @@ words = db.words
 
 # Parses newspaper's feed
 opener = urllib.request.build_opener()
-tree = ET.parse(opener.open('https://rss.draghetti.it/ilpost.xml')) # https://www.ilpost.it/feed/ does not work anymore?
+tree = ET.parse(opener.open('https://www.ilpost.it/feed')) # https://rss.draghetti.it/ilpost.xml alternative
 
 for item in tree.findall('channel/item'):
     try:
