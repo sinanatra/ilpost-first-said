@@ -62,7 +62,7 @@
 								.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })
 								.replace(/\b\w/g, (c) => c.toUpperCase())}
 						</text>
-						<line x1={xScale(new Date(d))} y1="14" x2={xScale(new Date(d))} y2={h} />
+						<line x1={xScale(new Date(d))} y1="14" x2={xScale(new Date(d))} y2={h || 0} />
 					{/if}
 				{/each}
 			</g>
