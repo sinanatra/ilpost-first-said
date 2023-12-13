@@ -2,7 +2,7 @@ import db from "$lib/db"
 import { ObjectId } from 'mongodb';
 
 const now = new Date();
-const start = new Date(now - 150 * 24 * 60 * 60 * 1000); // 30 days ago
+const start = new Date(now - 30 * 24 * 60 * 60 * 1000); // 30 days ago
 const end = now;
 
 export const GET = async ({ request, url }) => {
