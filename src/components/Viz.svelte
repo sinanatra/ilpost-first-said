@@ -47,8 +47,6 @@
 	$: uniqueDates = [...new Set(data.map((item) => timeFormat('%Y-%m-%d')(item?.date)))].sort(
 		(a, b) => b.localeCompare(a)
 	);
-
-	$: console.log(uniqueDates);
 </script>
 
 <section>
