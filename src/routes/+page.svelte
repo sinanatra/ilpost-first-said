@@ -40,16 +40,27 @@
 	</div>
 
 	<div>
-		Potete vedere come funziona su <a
-			target="_blank"
-			href="https://github.com/sinanatra/ilpost-first-said">Github</a
-		>. 
-		<br>
-		Inizialmente pensato come Bot su
-		<a target="_blank" href="https://twitter.com/ilpostdice">Twitter</a>, e per
-		<a target="_blank" href="https://t.me/nuoveparoledelpost">Telegram</a>
+		<p>
+			Ogni due ore uno script monitora il <a href="https://www.ilpost.it/feed/">feed Rss</a> del Post,
+			apre ogni articolo, controlla ogni parola e nel caso non sia mai stata utilizzata, la salva in
+			un Database.
+		</p>
+		<p>
+			Potete vedere come funziona su <a
+				target="_blank"
+				href="https://github.com/sinanatra/ilpost-first-said">Github</a
+			>.
+			<br />
+			Inizialmente pensato come Bot su
+			<a target="_blank" href="https://twitter.com/ilpostdice">Twitter</a>, e poi su
+			<a target="_blank" href="https://t.me/nuoveparoledelpost">Telegram.</a>
+		</p>
 	</div>
-	<div>Realizzato da <a target="_blank" href="https://giacomo.website/">Giacomo Nanni</a></div>
+	<div>
+		<p>
+			Realizzato da <a target="_blank" href="https://giacomo.website/">Giacomo Nanni</a>
+		</p>
+	</div>
 </section>
 <Viz {sortingOption} />
 
@@ -96,7 +107,7 @@
 		user-select: none;
 	}
 
-	 input[type=radio]{
+	input[type='radio'] {
 		/* accent-color: #2da8c6; */
 	}
 </style>
