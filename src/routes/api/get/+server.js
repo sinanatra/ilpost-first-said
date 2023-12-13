@@ -17,8 +17,12 @@ export const GET = async ({ request, url }) => {
         },
         word: {
             $regex: /\w{4,}/ // Match words with length greater than 3
-        }
+        },
+        url: { $exists: true },
+        date_added: { $exists: true },
+        context: { $exists: true } // Filter for documents where the "context" field exists
     }).sort({ _id: -1 }).toArray();
+    
 
 
 
