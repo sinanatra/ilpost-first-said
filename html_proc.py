@@ -56,7 +56,7 @@ for item in tree.findall('channel/item'):
                     for line in lines for phrase in line.split("  "))
         text = '\n'.join(chunk for chunk in chunks if chunk)
         # get tokens - ignore punctuation and capital letters
-        tokenizer = RegexpTokenizer(r'(?<=\W)\b\w+\b')
+        tokenizer = RegexpTokenizer(r'(?<![@#])\b\w+\b')
         tokens = tokenizer.tokenize(text)
         # remove duplicates
         tokens = list(set(tokens))
