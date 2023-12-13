@@ -75,7 +75,7 @@ for item in tree.findall('channel/item'):
         different_tokens = list(set(tokens) - set(cleaned_tokens))
         
         for token in different_tokens:
-            if any(str.isdigit(c) or str.isupper(c) for c in token) is True:
+            if any(str.isdigit(c) or str.isupper(c) for c in token) or len(token) <= 3:
                 continue
             else:
                 print('new token!', token)
