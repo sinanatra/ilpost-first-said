@@ -14,29 +14,6 @@
 			target="_blank">ilPost</a
 		>
 		negli ultimi 30 giorni.
-		<div class="filters">
-			Ordine:
-			<label>
-				<input
-					type="radio"
-					id="Time"
-					name="sortingOption"
-					value="Time"
-					bind:group={sortingOption}
-				/>
-				Temporale
-			</label>
-			<label>
-				<input
-					type="radio"
-					id="Alphabetically"
-					name="sortingOption"
-					value="Alphabetically"
-					bind:group={sortingOption}
-				/>
-				Alfabetico
-			</label>
-		</div>
 	</div>
 
 	<div>
@@ -61,7 +38,33 @@
 			Realizzato da <a target="_blank" href="https://giacomo.website/">Giacomo Nanni</a>.
 		</p>
 	</div>
+	<div class="filters">
+		<p>
+			Ordine:
+			<label>
+				<input
+					type="radio"
+					id="Time"
+					name="sortingOption"
+					value="Time"
+					bind:group={sortingOption}
+				/>
+				Temporale
+			</label>
+			<label>
+				<input
+					type="radio"
+					id="Alphabetically"
+					name="sortingOption"
+					value="Alphabetically"
+					bind:group={sortingOption}
+				/>
+				Alfabetico
+			</label>
+		</p>
+	</div>
 </section>
+
 <Viz {sortingOption} />
 
 <style>
@@ -81,6 +84,12 @@
 		color: #2da8c6;
 	}
 
+	p {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+
+
 	.intro {
 		display: flex;
 		flex-wrap: wrap;
@@ -91,6 +100,7 @@
 	}
 
 	div {
+		min-width: 300px;
 		font-size: 12px;
 		flex: 1;
 	}
@@ -103,6 +113,7 @@
 
 	.filters,
 	.filters * {
+		flex-basis: 100%;
 		cursor: pointer;
 		user-select: none;
 	}
