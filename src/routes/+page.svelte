@@ -53,12 +53,12 @@
 			<br />
 			Inizialmente pensato come Bot su
 			<a target="_blank" href="https://twitter.com/ilpostdice">Twitter</a>, e poi su
-			<a target="_blank" href="https://t.me/nuoveparoledelpost">Telegram.</a>
+			<a target="_blank" href="https://t.me/nuoveparoledelpost">Telegram</a>.
 		</p>
 	</div>
 	<div>
 		<p>
-			Realizzato da <a target="_blank" href="https://giacomo.website/">Giacomo Nanni</a>
+			Realizzato da <a target="_blank" href="https://giacomo.website/">Giacomo Nanni</a>.
 		</p>
 	</div>
 </section>
