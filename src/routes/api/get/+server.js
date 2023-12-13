@@ -2,8 +2,11 @@ import db from "$lib/db"
 import { ObjectId } from 'mongodb';
 
 const now = new Date();
-const start = new Date(now - 30 * 24 * 60 * 60 * 1000); // 30 days ago
-const end = now;
+const romeTimeString = now.toLocaleString('en-US', { timeZone:  'Europe/Rome' });
+const romeTime = new Date(romeTimeString);
+
+const start = new Date(romeTime - 30 * 24 * 60 * 60 * 1000); // 30 days ago
+const end = romeTime;
 
 export const GET = async ({ request, url }) => {
 
