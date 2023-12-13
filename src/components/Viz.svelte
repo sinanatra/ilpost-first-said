@@ -87,7 +87,7 @@
 	}
 
 	a tspan:hover {
-		fill: #2da8c6;
+		fill: var(--color-1);
 	}
 
 	.text {
@@ -95,7 +95,7 @@
 	}
 
 	.highlight {
-		fill: #2da8c6;
+		fill: var(--color-1);
 	}
 
 	.date,
