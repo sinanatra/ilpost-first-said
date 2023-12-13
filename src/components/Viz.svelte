@@ -65,11 +65,12 @@
 			<g bind:this={g}>
 				{#each data as d, i}
 					<text x={xScale(d.date)} y={40 + i * 22}>
-						<tspan class="text">...</tspan><tspan class="text">{@html d.snippets[0]}</tspan><tspan
-							class="highlight">{d.word}</tspan
-						><tspan class="text">{@html d.snippets[1]}</tspan><tspan class="text">...</tspan>
+						<tspan class="text">...</tspan><tspan class="text">{@html d.snippets[0] || ''}</tspan
+						><tspan class="highlight">{d.word}</tspan><tspan class="text"
+							>{@html d.snippets[1] || ''}</tspan
+						><tspan class="text">...</tspan>
 						<a href={d.url} target="_blank">
-							<tspan class="date">Pubblicato il: {timeFormat('%Y-%m-%d')(d.date)}↗</tspan>
+							<tspan class="date">Pubblicato alle: {timeFormat('%H:%M')(d.date)} ↗</tspan>
 						</a>
 					</text>
 				{/each}
