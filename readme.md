@@ -3,7 +3,7 @@
 # [@ilPostDice](https://twitter.com/ilpostdice)
 
 A script that tracks when the newspaper IlPost publishes a word for the first time.  
-Running at: [@ilPostDice](https://t.me/nuoveparoledelpost). Largely inspired by the work of [Max Bittker](https://www.nytimes.com/2022/01/25/learning/lesson-plans/lesson-of-the-day-when-the-times-first-says-it-this-twitter-bot-tracks-it.html).
+Running at: [@ilPostDice](https://t.me/nuoveparoledelpost). Largely inspired by the work of [Max Bittker](https://www.nytimes.com/2019/07/07/reader-center/nyt-first-said-words-twitter-bot.html).
 
 ## Scraper:
 ### Basic architecture
