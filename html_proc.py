@@ -50,7 +50,7 @@ for item in tree.findall('channel/item'):
         #get title
         title = innerSoup.find("h1", {'class':'entry-title'}).get_text()
         # get  and cleans the text
-        text = innerSoup.find('article').get_text()
+        text = innerSoup.find('div', {'class':'entry-container-main'}).get_text()
         lines = (line.strip() for line in text.splitlines())
         chunks = (phrase.strip()
                     for line in lines for phrase in line.split("  "))
