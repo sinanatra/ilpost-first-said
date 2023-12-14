@@ -11,7 +11,7 @@ Running at: [@ilPostDice](https://t.me/nuoveparoledelpost). Largely inspired by 
 
 Il Post first said is essentially a single script which runs every two hours as a cron job on Github.
 
-`html_proc.py` parses an xml document. In this case `https://rss.draghetti.it/ilpost.xml` ( originally `https://www.ilpost.it/feed/`, but it appears to be sometimes unreliable).
+`html_proc.py` parses an xml document. In this case `https://www.ilpost.it/feed/` ( sometimes `https://rss.draghetti.it/ilpost.xml`, as it appears to be sometimes more reliable).
 It opens the url of each new article, retrieves the text of the article, tokenizes each word and can: tweet the new words using `utils/tweet.py` or add them to telegram via: `utils/telegramBot.py`.   
 Each new word, its context, date and link are saved in a Mongo DB instance. For example:
 ```
