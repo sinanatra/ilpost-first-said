@@ -136,12 +136,14 @@
 	}
 
 	div {
+		max-width: 640px;
 		min-width: 300px;
 		font-size: 12px;
 		flex: 1;
 	}
 
 	.large {
+		max-width: 840px;
 		flex: 3;
 		font-size: clamp(24px, 3vw, 38px);
 		line-height: clamp(24px, 3vw, 38px);
@@ -149,6 +151,7 @@
 
 	.filters,
 	.filters * {
+		max-width: 100%;
 		flex-basis: 100%;
 		cursor: pointer;
 		user-select: none;
