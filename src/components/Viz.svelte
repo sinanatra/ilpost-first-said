@@ -33,7 +33,7 @@
 		data = await fetchData();
 		xScale = scaleTime()
 			.domain([data[0]?.date, data[data.length - 1]?.date])
-			.range([0, 300]);
+			.range([0, 800]);
 		xAxis = axisBottom(xScale);
 	});
 
