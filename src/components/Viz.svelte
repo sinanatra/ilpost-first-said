@@ -9,9 +9,10 @@
 	let svg;
 	let g;
 	let xAxis;
+	let lh = 22;
 
 	$: w = g?.getBoundingClientRect().width;
-	$: h = g?.getBoundingClientRect().height + 22;
+	$: h = g?.getBoundingClientRect().height + lh + 5;
 
 	async function fetchData() {
 		const res = await fetch(`/api/get`);
@@ -68,13 +69,17 @@
 			</g>
 			<g bind:this={g}>
 				{#each data as d, i}
-					<text x={xScale(d.date)} y={40 + i * 22}>
+					<text x={xScale(d.date)} y={40 + i * lh}>
 						<tspan class="text">...</tspan><tspan class="text">{@html d.snippets[0] || ''}</tspan
 						><tspan class="highlight">{d.word}</tspan><tspan class="text"
 							>{@html d.snippets[1] || ''}</tspan
 						><tspan class="text">...</tspan>
 						<a href={d.url} target="_blank">
-							<tspan class="date">Pubblicato alle: {timeFormat('%H:%M')(d.date)} ↗</tspan>
+							<tspan class="date"
+								>Menzionata il {new Date(d.date)
+									.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })
+									.replace(/\b\w/g, (c) => c.toUpperCase())} alle: {timeFormat('%H:%M')(d.date)} ↗</tspan
+							>
 						</a>
 					</text>
 				{/each}
