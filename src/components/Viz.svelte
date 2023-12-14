@@ -42,6 +42,8 @@
 			data = data.sort((a, b) => b.date_added.toString().localeCompare(a.date_added.toString()));
 		} else if (sortingOption == 'Alphabetically') {
 			data = data.sort((a, b) => a.word.localeCompare(b.word));
+		} else if (sortingOption == 'Length') {
+			data = data.sort((a, b) => b.word.length - a.word.length);
 		}
 	}
 
@@ -52,7 +54,7 @@
 
 <section>
 	{#if data.length === 0}
-		<p>Loading...</p>
+		<p>Caricamento delle parole più recenti...</p>
 	{:else}
 		<svg bind:this={svg} height="{h || 100}px" width="{w || 100}px">
 			<g class="dates">

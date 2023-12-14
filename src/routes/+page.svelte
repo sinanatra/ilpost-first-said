@@ -87,6 +87,16 @@
 				/>
 				Alfabetico
 			</label>
+			<label>
+				<input
+					type="radio"
+					id="Length"
+					name="sortingOption"
+					value="Length"
+					bind:group={sortingOption}
+				/>
+				Estensione
+			</label>
 		</p>
 	</div>
 </section>
