@@ -134,7 +134,7 @@
 	.large {
 		flex: 3;
 		font-size: clamp(24px, 3vw, 3vw);
-		line-height: clamp(24px, 2.9vw, 2.9vw);
+		line-height: clamp(24px, 3vw, 3vw);
 	}
 
 	.filters,
