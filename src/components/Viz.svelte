@@ -9,7 +9,7 @@
 	let svg;
 	let g;
 	let xAxis;
-	let lh = 22;
+	let lh = 24;
 
 	$: w = g?.getBoundingClientRect().width;
 	$: h = g?.getBoundingClientRect().height + lh + 5;
@@ -106,6 +106,7 @@
 
 	.highlight {
 		fill: var(--color-1);
+		font-size: 18px;
 	}
 
 	.date,
