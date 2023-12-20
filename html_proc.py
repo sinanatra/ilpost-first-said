@@ -49,10 +49,8 @@ for item in tree.findall('channel/item'):
             div.decompose()
 
         #get title
-        title = innerSoup.find("h1", {'class':'entry-title'}).get_text()
         title = title.text
         # get  and cleans the text
-        #text = innerSoup.find('div', {'class':'entry-container-main'}).get_text(separator=" ")
         text = innerSoup.find('article').get_text(separator=" ")
         lines = (line.strip() for line in text.splitlines())
         chunks = (phrase.strip()
