@@ -30,6 +30,7 @@ tree = ET.parse(opener.open('https://www.ilpost.it/feed')) # https://rss.draghet
 
 for item in tree.findall('channel/item'):
     try:
+        title = item.find('title')
         link = item.find('link')
         date = item.find('pubDate')
         pub_date = datetime.strptime(date.text, '%a, %d %b %Y %H:%M:%S %z').strftime('%Y-%m-%dT%H:%M:%S.%f%z')
@@ -49,8 +50,10 @@ for item in tree.findall('channel/item'):
 
         #get title
         title = innerSoup.find("h1", {'class':'entry-title'}).get_text()
+        title = title.text
         # get  and cleans the text
-        text = innerSoup.find('div', {'class':'entry-container-main'}).get_text(separator=" ")
+        #text = innerSoup.find('div', {'class':'entry-container-main'}).get_text(separator=" ")
+        text = innerSoup.find('article').get_text(separator=" ")
         lines = (line.strip() for line in text.splitlines())
         chunks = (phrase.strip()
                     for line in lines for phrase in line.split("  "))
